@@ -2,8 +2,7 @@
     <div class="promo-banner-container">
         <!-- Text Header -->
         <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-gray-900">DAPATKAN PROMO</h2>
-            <h2 class="text-3xl font-bold text-gray-900">SETIAP HARI</h2>
+            <h1 class="text-4xl font-extrabold text-center text-gray-900 mb-12 animate-fade-in-down tracking-tight">DAPATKAN PROMO<br>SETIAP HARI</h1>
         </div>
 
         <!-- Swiper Promo Slider -->

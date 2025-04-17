@@ -24,11 +24,14 @@
     <!-- member card -->
     <livewire:member-card />
 
+    <!-- Promo Banner -->
+    <livewire:promo-banner />
+
     <!-- Daily Promo -->
     <livewire:components.daily-promo />
 
-    <!-- Promo Banner -->
-    <livewire:promo-banner />
+    <!-- Keuntungan Belanja di Syihab Store -->
+    <livewire:keuntung-belanja />
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
