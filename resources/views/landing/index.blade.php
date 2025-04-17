@@ -27,6 +27,9 @@
     <!-- Daily Promo -->
     <livewire:components.daily-promo />
 
+    <!-- Promo Banner -->
+    <livewire:promo-banner />
+
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     @stack('scripts')
