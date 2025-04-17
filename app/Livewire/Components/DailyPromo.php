@@ -11,7 +11,7 @@ class DailyPromo extends Component
 {
     public function render()
     {
-        $promos = Promo::all(); // Fetch promos from the database
+        $promos = Promo::where('is_active', true)->orderBy('created_at', 'desc')->get();
         return view('livewire.components.daily-promo', compact('promos'));
     }
 }
