@@ -30,8 +30,17 @@
     <!-- Daily Promo -->
     <livewire:components.daily-promo />
 
+    <!-- brand slide -->
+    <livewire:slide-brand />
+    
     <!-- Keuntungan Belanja di Syihab Store -->
     <livewire:keuntung-belanja />
+
+    <!-- Tentang Kami -->
+    <livewire:about-us />
+
+    <!-- Footer -->
+    <livewire:footer />
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
