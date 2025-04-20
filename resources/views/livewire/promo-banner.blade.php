@@ -3,20 +3,20 @@
         Apa Rencanamu Hari Ini? 🤔
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- Tampilan Desktop (grid 2 kolom) -->
+    <div class="hidden md:grid grid-cols-1 md:grid-cols-2 gap-10">
         <!-- Kolom Kiri -->
         <div
             class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-[1.03] animate-fade-in-left group">
+            <!-- Konten desktop sama seperti sebelumnya -->
             <div class="bg-blue-600 py-5 px-6 flex flex-col items-center text-center space-y-3">
-                <img src="{{ asset('img/logo/syihab-white.png') }}" alt="Syihab Store" class="h-16 w-auto drop-shadow-lg">
                 <h2 class="text-xl font-bold text-white group-hover:scale-105 transition">
                     HP Baru di Syihab Store
                 </h2>
             </div>
             <div class="p-6">
                 <div class="mb-4 rounded-xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                        alt="HP Terbaru"
+                    <img src="{{ asset('img/GSK-Silhouette-Web.png') }}" alt="HP Terbaru"
                         class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
                 </div>
                 <p class="text-gray-600 mb-6 text-center text-lg">Promo Gila-gilaan, Jangan Lewatkan!</p>
@@ -38,15 +38,13 @@
         <div
             class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-[1.03] animate-fade-in-right group">
             <div class="bg-green-600 py-5 px-6 flex flex-col items-center text-center space-y-3">
-                <img src="{{ asset('img/logo/gsk-white.png') }}" alt="GSK" class="h-16 w-auto drop-shadow-lg">
                 <h2 class="text-xl font-bold text-white group-hover:scale-105 transition">
                     Tukar Tambah di GSK
                 </h2>
             </div>
             <div class="p-6">
                 <div class="mb-4 rounded-xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                        alt="Tukar Tambah"
+                    <img src="{{ asset('img/GSK-Silhouette-Web.png') }}" alt="Tukar Tambah"
                         class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
                 </div>
                 <p class="text-gray-600 mb-6 text-center text-lg">Upgrade HP-mu Sekarang, Mumpung Masih Tinggi!</p>
@@ -65,7 +63,30 @@
         </div>
     </div>
 
-    <!-- CSS Animasi -->
+    <!-- Tampilan Mobile (satu row dua kolom) -->
+    <div class="md:hidden grid grid-cols-2 gap-4">
+        <!-- Item 1 -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 flex flex-col items-center text-center">
+            <h3 class="text-sm font-semibold text-gray-900">Cari HP Baru di Syihab Store</h3>
+            <img src="{{ asset('img/GSK-Silhouette-Mobile.png') }}" alt="Tukar Tambah" class="w-16 h-12 mb-3">
+            <button wire:click="lihatProduk"
+                class="mt-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full text-xs">
+                Lihat Produk
+            </button>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 flex flex-col items-center text-center">
+            <h3 class="text-sm font-semibold text-gray-900">Tukar Tambah di GSK</h3>
+            <img src="{{ asset('img/GSK-Silhouette-Mobile.png') }}" alt="Tukar Tambah" class="w-16 h-12 mb-3">
+            <button wire:click="tukarSekarang"
+                class="mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-full text-xs">
+                Tukar Sekarang
+            </button>
+        </div>
+    </div>
+
+    <!-- CSS Animasi (tetap sama) -->
     <style>
         @keyframes fadeInDown {
             from {
@@ -113,25 +134,6 @@
 
         .animate-fade-in-right {
             animation: fadeInRight 0.7s ease-out forwards;
-        }
-
-        /* Extra Animasi */
-        .animate-pulse {
-            animation: pulse 2s infinite;
-        }
-
-        .animate-spin-slow {
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
         }
     </style>
 </div>
