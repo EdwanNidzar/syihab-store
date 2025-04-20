@@ -36,8 +36,14 @@
     <!-- Keuntungan Belanja di Syihab Store -->
     <livewire:keuntung-belanja />
 
+    <!-- Maps Slider -->
+    <livewire:maps-slider />
+
     <!-- Tentang Kami -->
     <livewire:about-us />
+
+    <!-- Find Our Store -->
+    <livewire:find-our-store />
 
     <!-- Footer -->
     <livewire:footer />
