@@ -13,10 +13,12 @@ class DailyPromo extends Model
         'description',
         'image',
         'is_active',
+        'is_popups',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_popups' => 'boolean',
     ];
 
     protected static function booted()

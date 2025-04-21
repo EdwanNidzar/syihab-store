@@ -27,6 +27,9 @@
     <!-- Promo Banner -->
     <livewire:promo-banner />
 
+    <!-- Daily Promo Popup -->
+    <livewire:popup-daily-promo />
+
     <!-- Daily Promo -->
     <livewire:components.daily-promo />
 

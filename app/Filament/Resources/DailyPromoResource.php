@@ -56,6 +56,11 @@ class DailyPromoResource extends Resource
                         Forms\Components\Toggle::make('is_active')
                             ->label('Aktifkan Promo')
                             ->default(true),
+
+                        Forms\Components\Toggle::make('is_popups')
+                            ->label('Tampilkan sebagai Pop-up')
+                            ->default(false)
+                            ->helperText('Jika diaktifkan, promo akan ditampilkan sebagai pop-up saat pengguna mengunjungi halaman.'),
                     ]),
             ]);
     }
@@ -79,6 +84,10 @@ class DailyPromoResource extends Resource
                     
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Status')
+                    ->boolean(),
+
+                Tables\Columns\IconColumn::make('is_popups')
+                    ->label('Pop-up')
                     ->boolean(),
             ])
             ->filters([
