@@ -13,7 +13,7 @@ class EventAndCredit extends Component
 
     public function credits()
     {
-        //
+        return redirect()->route('credits');
     }
 
     public function render()

@@ -15,4 +15,9 @@ class LandingController extends Controller
     {
         return view('landing.event');
     }
+
+    public function credits()
+    {
+        return view('landing.credit');
+    }
 }
