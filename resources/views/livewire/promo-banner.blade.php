@@ -16,8 +16,8 @@
             </div>
             <div class="p-6">
                 <div class="mb-4 rounded-xl overflow-hidden">
-                    <img src="{{ asset('img/GSK-Silhouette-Web.png') }}" alt="HP Terbaru"
-                        class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <img src="{{ asset('img/Syihab-Silhouette-Web.png') }}" alt="HP Terbaru"
+                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                 </div>
                 <p class="text-gray-600 mb-6 text-center text-lg">Promo Gila-gilaan, Jangan Lewatkan!</p>
                 <div class="flex justify-center">
@@ -45,7 +45,7 @@
             <div class="p-6">
                 <div class="mb-4 rounded-xl overflow-hidden">
                     <img src="{{ asset('img/GSK-Silhouette-Web.png') }}" alt="Tukar Tambah"
-                        class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105">
+                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                 </div>
                 <p class="text-gray-600 mb-6 text-center text-lg">Upgrade HP-mu Sekarang, Mumpung Masih Tinggi!</p>
                 <div class="flex justify-center">
@@ -68,7 +68,7 @@
         <!-- Item 1 -->
         <div class="bg-white rounded-2xl shadow-lg p-4 flex flex-col items-center text-center">
             <h3 class="text-sm font-semibold text-gray-900">Cari HP Baru di Syihab Store</h3>
-            <img src="{{ asset('img/GSK-Silhouette-Mobile.png') }}" alt="Tukar Tambah" class="w-16 h-12 mb-3">
+            <img src="{{ asset('img/Syihab-Silhouette-Web.png') }}" alt="HP Baru" class="w-16 h-8 mb-3">
             <button wire:click="lihatProduk"
                 class="mt-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full text-xs">
                 Lihat Produk
@@ -78,7 +78,7 @@
         <!-- Item 2 -->
         <div class="bg-white rounded-2xl shadow-lg p-4 flex flex-col items-center text-center">
             <h3 class="text-sm font-semibold text-gray-900">Tukar Tambah di GSK</h3>
-            <img src="{{ asset('img/GSK-Silhouette-Mobile.png') }}" alt="Tukar Tambah" class="w-16 h-12 mb-3">
+            <img src="{{ asset('img/GSK-Silhouette-Mobile.png') }}" alt="Tukar Tambah" class="w-18 h-12 mb-3">
             <button wire:click="tukarSekarang"
                 class="mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-full text-xs">
                 Tukar Sekarang

@@ -15,7 +15,7 @@
                        placeholder="Cari produk..." 
                        class="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500">
                 
-                {{-- @if($search && $results->count())
+                @if($search && $results->count())
                     <div class="absolute z-10 w-full mt-2 bg-white border rounded-lg shadow-lg">
                         @foreach($results as $product)
                             <a href="{{ route('products.show', $product) }}" 
@@ -24,7 +24,7 @@
                             </a>
                         @endforeach
                     </div>
-                @endif --}}
+                @endif
             </div>
 
             <!-- Menu -->

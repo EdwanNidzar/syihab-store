@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PricesList;
+use App\Models\Product;
 
 class LandingController extends Controller
 {
@@ -31,5 +32,18 @@ class LandingController extends Controller
         }
 
         return view('landing.pricelist', compact('pricelists'));
+    }
+
+    public function products()
+    {
+        return view('landing.products');
+    }
+
+    public function productDetail($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+
+        return view('landing.product-detail', compact('product'));
     }
 }

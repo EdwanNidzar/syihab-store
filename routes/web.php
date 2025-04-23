@@ -10,3 +10,7 @@ Route::get('/credits', [LandingController::class, 'credits'])->name('credits');
 Route::get('/price-list/{slug}', function ($slug) {
     return view('landing.pricelist', compact('slug'));
 })->name('price-list');
+
+
+Route::get('/products', [LandingController::class, 'products'])->name('products');
+Route::get('/products/{slug}', [LandingController::class, 'productDetail'])->name('product-detail');

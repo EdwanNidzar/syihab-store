@@ -8,8 +8,7 @@ class PromoBanner extends Component
 {
     public function lihatProduk()
     {
-        // Tambahkan logika redirect atau lainnya
-        // return redirect()->route('products');
+        return redirect()->route('products');
     }
 
     public function tukarSekarang()
