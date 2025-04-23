@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PricesList;
 
 class LandingController extends Controller
 {
@@ -19,5 +20,16 @@ class LandingController extends Controller
     public function credits()
     {
         return view('landing.credit');
+    }
+
+    public function priceList($slug)
+    {
+        $pricelists = PricesList::where('slug', $slug)->get();
+
+        if ($pricelists->isEmpty()) {
+            abort(404); // jika tidak ditemukan
+        }
+
+        return view('landing.pricelist', compact('pricelists'));
     }
 }
