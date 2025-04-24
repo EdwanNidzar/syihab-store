@@ -54,14 +54,16 @@
                     @endif
 
                     {{-- Harga --}}
-                    <div id="priceDisplay"
-                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white text-2xl font-bold text-center px-4 py-3 rounded-lg shadow-md">
-                        @if (is_array($product->variations) && count($product->variations))
-                            Rp
-                            {{ number_format($product->variations[array_key_first($product->variations)]['price'], 0, ',', '.') }}
-                        @else
-                            Rp {{ number_format($product->specs['harga'] ?? 0, 0, ',', '.') }}
-                        @endif
+                    <div id="priceDisplay" class="mb-6 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Harga:</p>
+                        <span id="priceValue" class="text-3xl font-bold text-blue-600">
+                            @if (is_array($product->variations) && count($product->variations))
+                                Rp
+                                {{ number_format($product->variations[array_key_first($product->variations)]['price'], 0, ',', '.') }}
+                            @else
+                                Rp {{ number_format($product->specs['harga'] ?? 0, 0, ',', '.') }}
+                            @endif
+                        </span>
                     </div>
 
                     {{-- Spesifikasi --}}
@@ -126,9 +128,9 @@
 
     <script>
         function selectVariant(key, variant) {
-            // Update price display
-            const priceDisplay = document.getElementById('priceDisplay');
-            priceDisplay.innerHTML = `Rp ${new Intl.NumberFormat('id-ID').format(variant.price)}`;
+            // Update hanya angka harga
+            const priceValue = document.getElementById('priceValue');
+            priceValue.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(variant.price)}`;
 
             // Update active button styling
             document.querySelectorAll('.variant-btn').forEach(btn => {
@@ -138,7 +140,7 @@
                 }
             });
 
-            // Update WhatsApp message with selected variant
+            // Update WhatsApp message
             const productName = "{{ $product->name }}";
             const variantText = `${variant.ram} GB / ${variant.storage} GB`;
             const whatsappMessage =

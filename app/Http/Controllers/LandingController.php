@@ -34,9 +34,16 @@ class LandingController extends Controller
         return view('landing.pricelist', compact('pricelists'));
     }
 
-    public function products()
+    public function product()
     {
         return view('landing.products');
+    }
+
+    public function products()
+    {
+        $products = Product::where('is_active', true)->latest()->get();
+
+        return view('landing.allProducts', compact('products'));
     }
 
     public function productDetail($slug)

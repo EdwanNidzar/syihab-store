@@ -4,7 +4,7 @@
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">Produk Terbaru</h2>
-                <a href="#" class="text-blue-600 text-sm hover:text-blue-800 transition">Lihat Semua Produk
+                <a href="{{ route('products') }}" class="text-blue-600 text-sm hover:text-blue-800 transition">Lihat Semua Produk
                     &rarr;</a>
             </div>
             <div class="relative">
