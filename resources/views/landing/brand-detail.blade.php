@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semua Produk - Syihab Store</title>
+    <title>{{ $brand->name }} - Syihab Store</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .product-image-container {
             height: 192px;
-            /* 12rem (48px * 4) */
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             background-color: #f3f4f6;
-            /* bg-gray-100 */
         }
 
         .product-image {
@@ -27,7 +26,6 @@
             max-width: 100%;
         }
 
-        /* Ensure the button stays at the bottom */
         .product-card {
             display: flex;
             flex-direction: column;
@@ -47,10 +45,14 @@
     <livewire:navigation />
 
     <!-- Header -->
-    <div class="text-center py-6">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Semua Produk</h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">Temukan berbagai produk unggulan yang tersedia di Syihab Store
-        </p>
+    <div class="p-6 mb-6 text-center">
+        <h1 class="text-2xl font-bold">{{ $brand->name }}</h1>
+        <p class="text-gray-600">Lihat produk-produk dari brand {{ $brand->name }} di Syihab Store</p>
+    </div>
+
+    <!-- Brand Description -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <p class="text-lg text-gray-600">{{ $brand->description }}</p>
     </div>
 
     <!-- Produk Grid -->
@@ -81,7 +83,7 @@
                     <a href="{{ route('product-detail', $product->slug) }}"
                         class="mt-2 inline-block text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
 
-                    <div class="product-content"></div> <!-- Empty div to take up space -->
+                    <div class="product-content"></div>
 
                     {{-- Tombol Order --}}
                     <a href="https://wa.me/628115546464?text={{ urlencode('Halo admin call center Syihab Store, saya tertarik dengan produk ' . $product->name) }}"
@@ -92,7 +94,7 @@
                     </a>
                 </div>
             @empty
-                <p class="col-span-full text-center text-gray-500">Tidak ada produk yang tersedia.</p>
+                <p class="col-span-full text-center text-gray-500">Tidak ada produk yang tersedia untuk brand ini.</p>
             @endforelse
         </div>
     </div>

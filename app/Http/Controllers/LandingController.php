@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PricesList;
 use App\Models\Product;
+use App\Models\Brand;
 
 class LandingController extends Controller
 {
@@ -53,4 +54,20 @@ class LandingController extends Controller
 
         return view('landing.product-detail', compact('product'));
     }
+
+    public function brands()
+    {
+        $brands = Brand::withCount('products')->where('is_active', true)->get();
+
+        return view('landing.allBrands', compact('brands'));
+    }
+
+    public function brandDetail($slug)
+    {
+        $brand = Brand::where('slug', $slug)->firstOrFail();
+        $products = $brand->products()->where('is_active', true)->latest()->get();
+
+        return view('landing.brand-detail', compact('brand', 'products'));
+    }
+
 }

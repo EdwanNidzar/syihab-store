@@ -15,3 +15,6 @@ Route::get('/price-list/{slug}', function ($slug) {
 Route::get('/product', [LandingController::class, 'product'])->name('product');
 Route::get('/products', [LandingController::class, 'products'])->name('products');
 Route::get('/product/{slug}', [LandingController::class, 'productDetail'])->name('product-detail');
+
+Route::get('/brands', [LandingController::class, 'brands'])->name('brands');
+Route::get('/brand/product/{slug}', [LandingController::class, 'brandDetail'])->name('brand-detail');
