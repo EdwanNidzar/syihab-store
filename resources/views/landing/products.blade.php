@@ -22,6 +22,9 @@
     <x-banner-carousel />
 
     <livewire:product-and-brand />
+
+    <!-- Pilih Smartphone -->
+    <livewire:pilih-smartphone />
     
     <!-- Keuntungan Belanja di Syihab Store -->
     <livewire:keuntung-belanja />

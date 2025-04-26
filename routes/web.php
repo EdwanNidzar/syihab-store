@@ -18,3 +18,6 @@ Route::get('/product/{slug}', [LandingController::class, 'productDetail'])->name
 
 Route::get('/brands', [LandingController::class, 'brands'])->name('brands');
 Route::get('/brand/product/{slug}', [LandingController::class, 'brandDetail'])->name('brand-detail');
+
+Route::get('/products/category/{category}', [LandingController::class, 'productsByCategory'])
+     ->name('products.category');

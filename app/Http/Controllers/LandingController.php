@@ -70,4 +70,33 @@ class LandingController extends Controller
         return view('landing.brand-detail', compact('brand', 'products'));
     }
 
+    public function productsByCategory($category)
+    {
+        $products = \App\Models\Product::all()->filter(function ($product) use ($category) {
+            if (!is_array($product->variations)) {
+                $variations = json_decode($product->variations, true);
+            } else {
+                $variations = $product->variations;
+            }
+
+            if (!$variations || !is_array($variations)) return false;
+
+            // Ambil harga termurah
+            $lowestPrice = collect($variations)->pluck('price')->min();
+
+            return match ($category) {
+                'entry' => $lowestPrice <= 4000000,
+                'mid' => $lowestPrice > 4000000 && $lowestPrice <= 7000000,
+                'flagship' => $lowestPrice > 7000000,
+                default => false,
+            };
+        });
+
+        return view('landing.productByCategory', [
+            'category' => $category,
+            'products' => $products,
+        ]);
+    }
+
+
 }
