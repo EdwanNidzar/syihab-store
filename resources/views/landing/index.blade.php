@@ -38,7 +38,7 @@
 
     <!-- Event and Credit -->
     <livewire:event-and-credit />
-    
+
     <!-- Keuntungan Belanja di Syihab Store -->
     <livewire:keuntung-belanja />
 
@@ -54,11 +54,22 @@
     <!-- Footer -->
     <livewire:footer />
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    @stack('scripts')
 
     @livewireScripts
+    <script>
+        document.addEventListener('alpine:init', () => {
+            console.log('Alpine dan Livewire ready');
+        });
+    </script>
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('product-not-found', (slug) => {
+                alert(`Produk ${slug} tidak ditemukan`);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

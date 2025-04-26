@@ -17,6 +17,8 @@ class Brand extends Model
         return $this->hasMany(Product::class);
     }
 
+    protected $withCount = ['products'];
+
     protected static function booted()
     {
         static::updating(function ($brand) {
