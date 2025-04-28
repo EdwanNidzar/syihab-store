@@ -49,4 +49,10 @@ class Navigation extends Component
     {
         $this->reset(['search', 'productResults', 'brandResults', 'showDropdown']);
     }
+
+    public function render()
+    {
+        $brands = Brand::where('is_active', true)->get();
+        return view('livewire.navigation', compact('brands'));
+    }
 }
