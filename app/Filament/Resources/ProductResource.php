@@ -78,6 +78,8 @@ class ProductResource extends Resource
                         ->columns(3)
                         ->columnSpanFull()
                         ->label('Available Variations')
+                        ->reactive()
+                        ->hidden(fn (callable $get) => $get('is_preorder')), // Sembunyikan kalau preorder aktif
                 ])
                 ->collapsible()
                 ->collapsed(),
@@ -86,13 +88,23 @@ class ProductResource extends Resource
                 ->schema([
                     Forms\Components\FileUpload::make('image')->image()->directory('products')->required(),
                     Forms\Components\FileUpload::make('gallery')->image()->directory('products/gallery')->multiple()->reorderable(),
-                    Forms\Components\TextInput::make('google_form_link')->url()->required()->columnSpanFull(),
                 ]),
 
             Forms\Components\Section::make('Status')
                 ->schema([
-                    Forms\Components\Toggle::make('is_featured')->label('Featured Product'),
-                    Forms\Components\Toggle::make('is_active')->label('Active')->default(true),
+                    Forms\Components\Toggle::make('is_preorder')
+                        ->label('Preorder')
+                        ->default(false)
+                        ->reactive()
+                        ->afterStateUpdated(function ($state, callable $set) {
+                            if ($state) {
+                                $set('variations', []); // Jika preorder aktif, kosongkan variations
+                            }
+                        }),
+
+                    Forms\Components\Toggle::make('is_active')
+                        ->label('Active')
+                        ->default(true),
                 ])
                 ->columns(2),
         ]);
@@ -141,7 +153,7 @@ class ProductResource extends Resource
                 ->searchable()
                 ->sortable(),
 
-            Tables\Columns\IconColumn::make('is_featured')->boolean()->label('Featured'),
+            Tables\Columns\IconColumn::make('is_preorder')->boolean()->label('Preorder'),
             Tables\Columns\IconColumn::make('is_active')->boolean()->label('Active'),
         ])
         ->filters([
@@ -149,9 +161,9 @@ class ProductResource extends Resource
                 ->relationship('brand', 'name')
                 ->label('Filter by Brand'),
 
-            Tables\Filters\Filter::make('featured')
-                ->query(fn($query) => $query->where('is_featured', true))
-                ->label('Featured Only'),
+            Tables\Filters\Filter::make('preorder')
+                ->query(fn($query) => $query->where('is_preorder', true))
+                ->label('Preorder Only'),
 
             Tables\Filters\Filter::make('active')
                 ->query(fn($query) => $query->where('is_active', true))

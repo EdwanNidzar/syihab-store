@@ -9,7 +9,7 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     @livewireStyles
-    
+
 </head>
 
 <body class="bg-gray-100 text-gray-800">
@@ -25,7 +25,16 @@
 
             <div class="grid md:grid-cols-2 gap-10 bg-white rounded-xl shadow-md p-6">
                 {{-- Gambar Produk --}}
-                <div class="flex justify-center items-center">
+                <div class="flex justify-center items-center relative">
+                    <!-- Menampilkan badge Pre-Order jika tidak ada variasi produk -->
+                    @if (empty($product->variations))
+                        <div class="absolute top-2 right-2 z-10">
+                            <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center relative drop-shadow-lg">
+                                <img src="{{ asset('img/pre-order.png') }}" alt="Pre Order" class="w-10 h-10">
+                            </div>
+                        </div>
+                    @endif
+                    <!-- Gambar Produk -->
                     <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                         class="rounded-lg w-full max-w-md object-contain shadow-sm">
                 </div>
@@ -61,7 +70,7 @@
                                 Rp
                                 {{ number_format($product->variations[array_key_first($product->variations)]['price'], 0, ',', '.') }}
                             @else
-                                Rp {{ number_format($product->specs['harga'] ?? 0, 0, ',', '.') }}
+                               PRE ORDER
                             @endif
                         </span>
                     </div>

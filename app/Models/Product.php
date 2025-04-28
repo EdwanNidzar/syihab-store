@@ -9,14 +9,14 @@ class Product extends Model
 {
     protected $fillable = [
         'brand_id', 'name', 'slug', 'description', 'specs', 'variations',
-        'image', 'gallery', 'google_form_link', 'is_featured', 'is_active',
+        'image', 'gallery', 'is_preorder', 'is_active',
     ];
 
     protected $casts = [
         'specs' => 'array',
         'variations' => 'array',
         'gallery' => 'array',
-        'is_featured' => 'boolean',
+        'is_preorder' => 'boolean',
         'is_active' => 'boolean',
     ];
 

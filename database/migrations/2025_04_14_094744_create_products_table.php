@@ -21,8 +21,7 @@ return new class extends Migration
             $table->json('variations')->nullable(); // Variasi dengan harga berbeda
             $table->string('image');
             $table->json('gallery')->nullable();
-            $table->string('google_form_link');
-            $table->boolean('is_featured')->default(false);
+            $table->boolean('is_preorder')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

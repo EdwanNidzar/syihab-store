@@ -4,7 +4,8 @@
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">Produk Terbaru</h2>
-                <a href="{{ route('products') }}" class="text-blue-600 text-sm hover:text-blue-800 transition">Lihat Semua Produk
+                <a href="{{ route('products') }}" class="text-blue-600 text-sm hover:text-blue-800 transition">Lihat Semua
+                    Produk
                     &rarr;</a>
             </div>
             <div class="relative">
@@ -16,6 +17,15 @@
                                     class="bg-white rounded-lg shadow p-4 w-full max-w-[14rem] mx-auto hover:shadow-md transition relative">
                                     <div
                                         class="h-36 mb-2 rounded overflow-hidden bg-gray-100 flex items-center justify-center">
+                                        @if (!empty($produk->is_preorder))
+                                            <div class="absolute top-2 right-2 z-10">
+                                                <div
+                                                    class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center relative drop-shadow-lg">
+                                                    <img src="{{ asset('img/pre-order.png') }}" alt="Pre Order"
+                                                        class="w-5 h-5">
+                                                </div>
+                                            </div>
+                                        @endif
                                         <img src="{{ asset('storage/' . $produk->image) }}" alt="{{ $produk->name }}"
                                             class="max-h-full max-w-full object-contain p-2" loading="lazy"
                                             decoding="async">
@@ -25,7 +35,8 @@
                                     </div>
                                     <h3 class="text-sm font-semibold truncate">{{ $produk->name }}</h3>
                                     <a href="{{ route('product-detail', $produk->slug) }}"
-                                        class="text-blue-600 text-sm hover:text-blue-800 transition block mt-2 z-10 relative">Lihat Detail</a>
+                                        class="text-blue-600 text-sm hover:text-blue-800 transition block mt-2 z-10 relative">Lihat
+                                        Detail</a>
                                 </div>
                             </div>
                         @endforeach
@@ -41,7 +52,8 @@
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">Pilihan Merek</h2>
-                <a href="{{ route('brands') }}" class="text-blue-600 text-sm hover:text-blue-800 transition">Lihat Semua Merek
+                <a href="{{ route('brands') }}" class="text-blue-600 text-sm hover:text-blue-800 transition">Lihat Semua
+                    Merek
                     &rarr;</a>
             </div>
             <div class="relative">
@@ -79,19 +91,21 @@
 </div>
 
 @push('styles')
-<style>
-    /* Fix for clickable links inside swiper */
-    .swiper-slide {
-        height: auto;
-        pointer-events: auto !important;
-    }
-    .swiper-slide > div {
-        height: 100%;
-    }
-    .swiper {
-        overflow: visible;
-    }
-</style>
+    <style>
+        /* Fix for clickable links inside swiper */
+        .swiper-slide {
+            height: auto;
+            pointer-events: auto !important;
+        }
+
+        .swiper-slide>div {
+            height: 100%;
+        }
+
+        .swiper {
+            overflow: visible;
+        }
+    </style>
 @endpush
 
 @push('scripts')
