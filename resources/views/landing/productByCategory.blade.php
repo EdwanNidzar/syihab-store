@@ -2,9 +2,9 @@
 <html lang="id">
 
 <head>
+    {!! SEO::generate() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kategori Produk - Syihab Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .product-image-container {

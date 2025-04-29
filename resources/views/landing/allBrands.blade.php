@@ -2,10 +2,9 @@
 <html lang="id">
 
 <head>
+    {!! SEO::generate() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semua Brand - Syihab Store</title>
-    <meta name="description" content="Temukan berbagai brand unggulan yang tersedia di Syihab Store">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
