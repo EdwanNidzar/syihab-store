@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {!! SEO::generate() !!}
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     @livewireStyles
-
 </head>
 
 <body class="bg-gray-100 text-gray-800">
@@ -22,29 +20,26 @@
         </h1>
 
         <div class="container mx-auto px-3 py-6 max-w-7xl">
-
             <div class="grid md:grid-cols-2 gap-10 bg-white rounded-xl shadow-md p-6">
-                {{-- Gambar Produk --}}
+                <!-- Gambar Produk -->
                 <div class="flex justify-center items-center relative">
-                    <!-- Menampilkan badge Pre-Order jika tidak ada variasi produk -->
                     @if (empty($product->variations))
                         <div class="absolute top-2 right-2 z-10">
-                            <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center relative drop-shadow-lg">
+                            <div
+                                class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center relative drop-shadow-lg">
                                 <img src="{{ asset('img/pre-order.png') }}" alt="Pre Order" class="w-10 h-10">
                             </div>
                         </div>
                     @endif
-                    <!-- Gambar Produk -->
                     <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                         class="rounded-lg w-full max-w-md object-contain shadow-sm">
                 </div>
 
-                {{-- Detail Produk --}}
+                <!-- Detail Produk -->
                 <div class="space-y-5">
-                    {{-- Nama Produk --}}
                     <h2 class="text-2xl font-bold text-gray-800">{{ $product->name }}</h2>
 
-                    {{-- Variasi --}}
+                    <!-- Variasi Produk -->
                     @if (is_array($product->variations) && count($product->variations))
                         <div>
                             <p class="text-sm font-medium text-gray-500 mb-2">Pilih Varian:</p>
@@ -62,7 +57,7 @@
                         </div>
                     @endif
 
-                    {{-- Harga --}}
+                    <!-- Harga -->
                     <div id="priceDisplay" class="mb-6 p-4 bg-blue-50 rounded-lg">
                         <p class="text-sm text-gray-600 mb-1">Harga:</p>
                         <span id="priceValue" class="text-3xl font-bold text-blue-600">
@@ -70,12 +65,12 @@
                                 Rp
                                 {{ number_format($product->variations[array_key_first($product->variations)]['price'], 0, ',', '.') }}
                             @else
-                               PRE ORDER
+                                PRE ORDER
                             @endif
                         </span>
                     </div>
 
-                    {{-- Spesifikasi --}}
+                    <!-- Spesifikasi -->
                     @if (is_array($product->specs))
                         <div class="space-y-4 mt-6">
                             <h3 class="text-lg font-semibold text-gray-700">Spesifikasi Lengkap</h3>
@@ -107,19 +102,18 @@
                         </div>
                     @endif
 
-                    {{-- Tombol Order --}}
+                    <!-- Tombol WhatsApp -->
                     <a id="whatsappButton"
                         href="https://wa.me/628115546464?text={{ urlencode('Halo admin call center Syihab Store, saya tertarik dengan produk ' . $product->name . (is_array($product->variations) && count($product->variations) ? ' varian ' . $product->variations[array_key_first($product->variations)]['ram'] . ' GB / ' . $product->variations[array_key_first($product->variations)]['storage'] . ' GB' : '')) }}"
-                        target="_blank"
-                        class="block text-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700
-                        text-white font-semibold py-3 rounded-lg transition duration-200 shadow-md">
+                        target="_blank" data-product-name="{{ $product->name }}"
+                        class="whatsapp-btn block text-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-md">
                         🛒 Pesan Sekarang via WhatsApp
                     </a>
 
                 </div>
             </div>
 
-            {{-- Galeri Produk --}}
+            <!-- Galeri Produk -->
             @if (is_array($product->gallery) && count($product->gallery))
                 <div class="mt-12">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">Galeri Produk</h2>
@@ -132,16 +126,14 @@
                 </div>
             @endif
         </div>
-
     </div>
 
+    <!-- Script: Pilih Varian -->
     <script>
         function selectVariant(key, variant) {
-            // Update hanya angka harga
             const priceValue = document.getElementById('priceValue');
             priceValue.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(variant.price)}`;
 
-            // Update active button styling
             document.querySelectorAll('.variant-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-100', 'border-blue-300');
                 if (btn.dataset.key === key) {
@@ -149,7 +141,6 @@
                 }
             });
 
-            // Update WhatsApp message
             const productName = "{{ $product->name }}";
             const variantText = `${variant.ram} GB / ${variant.storage} GB`;
             const whatsappMessage =
@@ -160,13 +151,38 @@
         }
     </script>
 
+    <!-- Script: Track CTA -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.whatsapp-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const productName = this.dataset.productName;
+
+                    fetch("{{ url('/track-click') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                page: document.title,
+                                cta_name: "Product Detail - " + productName
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => console.log("CTA Tracked:", data))
+                        .catch(error => console.error("Error:", error));
+                });
+            });
+        });
+    </script>
+
     <!-- Tentang Kami -->
     <livewire:about-us />
 
     <!-- Footer -->
     <livewire:footer />
 
-    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     @stack('scripts')
     @livewireScripts
