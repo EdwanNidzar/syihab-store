@@ -157,7 +157,7 @@
                         class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-medium">Events</a>
                     <a href="{{ route("credits") }}"
                         class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-medium">Simulasi Kredit</a>
-                    <a href="#"
+                    <a href="#aboutus" wire:click.prevent="dispatch('scrollToAbout')"
                         class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-medium">Tentang
                         Kami</a>
                 </div>
@@ -323,7 +323,7 @@
 
                 <a href="{{ route("events") }}" class="block py-3 text-gray-800">Events</a>
                 <a href="{{ route("credits") }}" class="block py-3 text-gray-800">Simulasi Kredit</a>
-                <a href="#" class="block py-3 text-gray-800">Tentang Kami</a>
+                <a href="#aboutus" wire:click.prevent="dispatch('scrollToAbout')" class="block py-3 text-gray-800">Tentang Kami</a>
             </div>
         </div>
 
@@ -332,3 +332,15 @@
     <!-- Spacer untuk konten di bawah fixed mobile header -->
     <div class="md:hidden h-16"></div>
 </nav>
+
+@push('scripts')
+<script>
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('scrollToAbout', () => {
+            document.getElementById('aboutus')?.scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    });
+</script>
+@endpush

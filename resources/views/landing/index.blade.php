@@ -12,6 +12,8 @@
 
     <link rel="icon" type="image/png" href="{{ asset('img/logo/new-logo-syihab.png') }}">
 
+    @stack('styles')
+
     @livewireStyles
 </head>
 
