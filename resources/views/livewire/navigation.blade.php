@@ -5,8 +5,8 @@
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="/"
-                        class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-200">
+                    <a href="/" class="flex items-center text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-200">
+                        <img src="{{ asset('img/logo/new-logo-syihab.png') }}" alt="Syihab Store Logo" class="h-8 w-auto mr-2 rounded-full">
                         Syihab Store
                     </a>
                 </div>
@@ -153,6 +153,10 @@
                             @endforeach
                         </ul>
                     </div>
+                    <a href="{{ route("events") }}"
+                        class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-medium">Events</a>
+                    <a href="{{ route("credits") }}"
+                        class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-medium">Simulasi Kredit</a>
                     <a href="#"
                         class="text-gray-800 hover:text-blue-600 transition-colors duration-200 font-medium">Tentang
                         Kami</a>
@@ -317,6 +321,8 @@
                     </div>
                 </div>
 
+                <a href="{{ route("events") }}" class="block py-3 text-gray-800">Events</a>
+                <a href="{{ route("credits") }}" class="block py-3 text-gray-800">Simulasi Kredit</a>
                 <a href="#" class="block py-3 text-gray-800">Tentang Kami</a>
             </div>
         </div>

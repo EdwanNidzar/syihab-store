@@ -5,7 +5,7 @@
     {!! SEO::generate() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo/new-logo-syihab.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .product-image-container {
