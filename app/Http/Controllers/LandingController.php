@@ -130,7 +130,19 @@ class LandingController extends Controller
 
     public function productsByCategory($category)
     {
-        $products = \App\Models\Product::all()->filter(function ($product) use ($category) {
+        // Daftar kategori harga
+        $priceCategories = [
+            '1-jutaan' => ['min' => 1000000, 'max' => 1999999],
+            '2-jutaan' => ['min' => 2000000, 'max' => 2999999],
+            '3-jutaan' => ['min' => 3000000, 'max' => 3999999],
+            '4-jutaan' => ['min' => 4000000, 'max' => 4999999],
+            '5-jutaan' => ['min' => 5000000, 'max' => 5999999],
+            'entry-level' => ['min' => 0, 'max' => 1999999],
+            'midrange' => ['min' => 2000000, 'max' => 4999999],
+            'flagship' => ['min' => 5000000, 'max' => 100000000]
+        ];
+
+        $products = \App\Models\Product::all()->filter(function ($product) use ($category, $priceCategories) {
             if (!is_array($product->variations)) {
                 $variations = json_decode($product->variations, true);
             } else {
@@ -142,6 +154,13 @@ class LandingController extends Controller
             // Ambil harga termurah
             $lowestPrice = collect($variations)->pluck('price')->min();
 
+            // Cek jika kategori termasuk kategori harga
+            if (array_key_exists($category, $priceCategories)) {
+                $range = $priceCategories[$category];
+                return $lowestPrice >= $range['min'] && $lowestPrice <= $range['max'];
+            }
+
+            // Kategori original
             return match ($category) {
                 'entry' => $lowestPrice <= 4000000,
                 'mid' => $lowestPrice > 4000000 && $lowestPrice <= 7000000,
@@ -149,6 +168,12 @@ class LandingController extends Controller
                 default => false,
             };
         });
+
+        // Untuk SEO, ubah judul jika kategori harga
+        $categoryLabel = str_replace('-', ' ', $category);
+        if (array_key_exists($category, $priceCategories)) {
+            $categoryLabel = 'Harga ' . $categoryLabel;
+        }
 
         SEOTools::setTitle('Syihab Store - Produk ' . $category);
         SEOTools::setDescription('Produk Syihab Store');
@@ -158,7 +183,7 @@ class LandingController extends Controller
         SEOMeta::addKeyword(['Syihab Store', 'SyihabStore', 'Syihab', 'Syihab Store Official', 'Syihab Store Official Store']);
         
         return view('landing.productByCategory', [
-            'category' => $category,
+            'category' => $categoryLabel, // Kirim label yang sudah diformat
             'products' => $products,
         ]);
     }

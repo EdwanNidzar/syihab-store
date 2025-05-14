@@ -25,8 +25,11 @@
     <!-- Banner -->
     <x-banner-carousel />
 
-    <!-- member card -->
-    <livewire:member-card />
+    <!-- member card // ini di matikan sampai waktu yg ditentukan-->
+    {{-- <livewire:member-card /> --}}
+
+    <!-- Brand dan Variant Harga -->
+    <livewire:brand-list />
 
     <!-- Promo Banner -->
     <livewire:promo-banner />

@@ -1,7 +1,7 @@
 <div class="promo-slider-component">
     <div class="promo-banner-container">
         <!-- Text Header -->
-        <div class="text-center mb-8">
+        <div class="text-center mb-6 mt-2">
             <h1 class="text-4xl font-extrabold text-center text-gray-900 mb-12 animate-fade-in-down tracking-tight">DAPATKAN PROMO<br>SETIAP HARI</h1>
         </div>
 
