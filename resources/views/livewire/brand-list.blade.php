@@ -4,7 +4,9 @@
         <div class="grid grid-cols-8 gap-4 min-w-[800px] bg-white p-4 rounded">
             @foreach ($brands as $brand)
                 <div class="text-center p-4 border rounded shadow hover:shadow-md transition">
-                    <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}" class="w-full h-auto">
+                    <a href="{{ route('brand-detail', $brand->slug) }}">
+                        <img src="{{ Storage::url($brand->logo) }}" alt="{{ $brand->name }}" class="w-full h-auto">
+                    </a>
                 </div>
             @endforeach
         </div>

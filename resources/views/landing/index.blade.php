@@ -37,14 +37,14 @@
     <!-- Daily Promo Popup -->
     <livewire:popup-daily-promo />
 
-    <!-- Daily Promo -->
+    {{-- <!-- Daily Promo -->
     <livewire:components.daily-promo />
 
     <!-- brand slide -->
     <livewire:slide-brand />
 
     <!-- Event and Credit -->
-    <livewire:event-and-credit />
+    <livewire:event-and-credit /> --}}
 
     <!-- Keuntungan Belanja di Syihab Store -->
     <livewire:keuntung-belanja />
