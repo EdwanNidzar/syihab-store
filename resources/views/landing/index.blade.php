@@ -37,6 +37,9 @@
     <!-- Daily Promo Popup -->
     <livewire:popup-daily-promo />
 
+    <!-- All Products -->
+    <livewire:product-list />
+
     {{-- <!-- Daily Promo -->
     <livewire:components.daily-promo />
 
