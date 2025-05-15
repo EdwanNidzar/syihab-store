@@ -56,7 +56,7 @@
 
     <!-- Produk Grid -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @forelse ($products as $product)
                 <div
                     class="bg-white rounded-lg shadow hover:shadow-md transition p-4 flex flex-col product-card relative">
