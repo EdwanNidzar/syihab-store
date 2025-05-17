@@ -54,6 +54,7 @@
             </div>
 
             <!-- Load More Button -->
+            <!-- Untuk menambahkan load 4 product lagi -->
             @if ($brand->products->count() > ($loadedCounts[$brand->id] ?? $perBrand))
                 <div class="text-center mt-6">
                     <button wire:click="loadMore({{ $brand->id }})" wire:loading.attr="disabled"

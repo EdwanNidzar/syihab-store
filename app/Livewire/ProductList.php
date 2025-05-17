@@ -5,6 +5,12 @@ namespace App\Livewire;
 use App\Models\Brand;
 use Livewire\Component;
 
+// This component is responsible for loading and displaying a list of products
+// from different brands. It allows for lazy loading of products, meaning
+// that only a certain number of products are loaded initially, and more
+// can be loaded on demand. This is useful for performance reasons, especially
+// when dealing with a large number of products. The component also handles
+
 class ProductList extends Component
 {
     public $perBrand = 4; // Jumlah produk awal per brand
