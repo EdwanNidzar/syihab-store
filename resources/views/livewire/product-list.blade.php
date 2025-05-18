@@ -25,31 +25,51 @@
             <!-- Produk Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($brand->products->take($loadedCounts[$brand->id] ?? $perBrand) as $product)
-                    <div class="bg-white rounded-lg shadow hover:shadow-md transition p-4 flex flex-col h-full">
-                        <div class="product-image-container mb-3 rounded-md overflow-hidden flex-grow-0">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                class="w-full h-48 object-cover">
+                    <a href="{{ route('product-detail', $product->slug) }}" class="group block">
+                        <div
+                            class="bg-white rounded-lg shadow hover:shadow-md transition p-4 flex flex-col h-full group-hover:border group-hover:border-blue-200">
+                            <div class="product-image-container mb-3 rounded-md overflow-hidden flex-grow-0">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                    class="w-full h-48 product-image"
+                                    style="object-fit: contain; width: 100%; height: 100%; max-height: 100%; max-width: 100%;">
+                            </div>
+
+                            <div class="flex-grow">
+                                <h3
+                                    class="text-xs sm:text-xs md:text-xl lg:text-2xl font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 group-hover:text-blue-600">
+                                    {{ $product->name }}
+                                </h3>
+
+                                @if ($product->variations)
+                                    @php
+                                        $minPrice = min(array_column($product->variations, 'price'));
+                                        $installment = $minPrice / 6;
+                                    @endphp
+
+                                    <p class="text-sm text-gray-600 mb-2">
+                                        Mulai dari
+                                        <span class="font-bold text-green-600">
+                                            Rp {{ number_format($minPrice, 0, ',', '.') }}
+                                        </span>
+                                    </p>
+
+                                    <div class="text-xs text-gray-500 mt-1">
+                                        <span class="font-medium">Atau cicilan:</span>
+                                        <div class="flex items-center gap-1 mt-1">
+                                            <span>6x</span>
+                                            <span class="font-semibold text-gray-700">
+                                                Rp {{ number_format($installment, 0, ',', '.') }}/bln
+                                            </span>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="text-blue-600 group-hover:text-blue-800 font-medium text-sm mt-2 inline-block">
+                                Lihat Detail
+                            </div>
                         </div>
-
-                        <div class="flex-grow">
-                            <h3 class="text-lg font-semibold mb-2">{{ $product->name }}</h3>
-
-                            @if ($product->variations)
-                                <p class="text-sm text-gray-600 mb-2">
-                                    Mulai dari
-                                    <span class="font-bold text-green-600">
-                                        Rp
-                                        {{ number_format(min(array_column($product->variations, 'price')), 0, ',', '.') }}
-                                    </span>
-                                </p>
-                            @endif
-                        </div>
-
-                        <a href="{{ route('product-detail', $product->slug) }}"
-                            class="text-blue-600 hover:text-blue-800 font-medium text-sm mt-2 inline-block">
-                            Lihat Detail
-                        </a>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 

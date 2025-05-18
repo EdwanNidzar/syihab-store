@@ -71,6 +71,22 @@
                         </span>
                     </div>
 
+                    <!-- Cicilan (updated to work with variant selection) -->
+                    <div id="installmentDisplay" class="text-sm text-gray-500">
+                        <span class="font-medium">Atau cicilan:</span>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span>6x</span>
+                            <span id="installmentValue" class="font-semibold text-gray-700">
+                                @if (is_array($product->variations) && count($product->variations))
+                                    Rp
+                                    {{ number_format($product->variations[array_key_first($product->variations)]['price'] / 6, 0, ',', '.') }}/bln
+                                @else
+                                    -
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+
                     <!-- Spesifikasi -->
                     @if (is_array($product->specs))
                         <div class="space-y-4 mt-6">
@@ -132,9 +148,15 @@
     <!-- Script: Pilih Varian -->
     <script>
         function selectVariant(key, variant) {
+            // Update price display
             const priceValue = document.getElementById('priceValue');
             priceValue.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(variant.price)}`;
 
+            // Update installment display
+            const installmentValue = document.getElementById('installmentValue');
+            installmentValue.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(Math.round(variant.price / 6))}/bln`;
+
+            // Update active button styling
             document.querySelectorAll('.variant-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-100', 'border-blue-300');
                 if (btn.dataset.key === key) {
@@ -142,6 +164,7 @@
                 }
             });
 
+            // Update WhatsApp message
             const productName = "{{ $product->name }}";
             const variantText = `${variant.ram} GB / ${variant.storage} GB`;
             const whatsappMessage =
