@@ -24,49 +24,67 @@
 
             <!-- Produk Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @foreach ($brand->products->take($loadedCounts[$brand->id] ?? $perBrand) as $product)
+                @foreach ($brand->products->sortByDesc('is_bestseller')->take($loadedCounts[$brand->id] ?? $perBrand) as $product)
                     <a href="{{ route('product-detail', $product->slug) }}" class="group block">
                         <div
-                            class="bg-white rounded-lg shadow hover:shadow-md transition p-4 flex flex-col h-full group-hover:border group-hover:border-blue-200">
+                            class="bg-white rounded-lg shadow hover:shadow-md transition p-4 flex flex-col h-full group-hover:border group-hover:border-blue-200 relative">
+                            <!-- Bestseller Badge -->
+                            @if ($product->is_bestseller)
+                                <div
+                                    class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md z-10">
+                                    BESTSELLER
+                                </div>
+                            @endif
+
                             <div class="product-image-container mb-3 rounded-md overflow-hidden flex-grow-0">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                    class="w-full h-48 product-image"
-                                    style="object-fit: contain; width: 100%; height: 100%; max-height: 100%; max-width: 100%;">
+                                    class="w-full h-48 product-image object-cover" style="object-fit: contain;">
                             </div>
 
                             <div class="flex-grow">
                                 <h3
-                                    class="text-xs sm:text-xs md:text-xl lg:text-2xl font-semibold mb-1 sm:mb-2 md:mb-3 lg:mb-4 group-hover:text-blue-600">
+                                    class="text-sm md:text-base font-semibold mb-2 group-hover:text-blue-600 line-clamp-2">
                                     {{ $product->name }}
                                 </h3>
 
                                 @if ($product->variations)
                                     @php
                                         $minPrice = min(array_column($product->variations, 'price'));
+                                        $maxPrice = max(array_column($product->variations, 'price'));
                                         $installment = $minPrice / 6;
                                     @endphp
 
-                                    <p class="text-sm text-gray-600 mb-2">
-                                        Mulai dari
-                                        <span class="font-bold text-green-600">
-                                            Rp {{ number_format($minPrice, 0, ',', '.') }}
-                                        </span>
-                                    </p>
-
-                                    <div class="text-xs text-gray-500 mt-1">
-                                        <span class="font-medium">Atau cicilan:</span>
-                                        <div class="flex items-center gap-1 mt-1">
-                                            <span>6x</span>
-                                            <span class="font-semibold text-gray-700">
-                                                Rp {{ number_format($installment, 0, ',', '.') }}/bln
+                                    <div class="space-y-1">
+                                        <p class="text-sm text-gray-600">
+                                            Mulai dari
+                                            <span class="font-bold text-green-600">
+                                                Rp {{ number_format($minPrice, 0, ',', '.') }}
                                             </span>
+                                        </p>
+
+                                        <div class="text-xs text-gray-500 pt-1">
+                                            <span class="font-medium">Atau cicilan:</span>
+                                            <div class="flex items-center gap-1">
+                                                <span>6x</span>
+                                                <span class="font-semibold text-gray-700">
+                                                    Rp {{ number_format($installment, 0, ',', '.') }}/bln
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 @endif
                             </div>
 
-                            <div class="text-blue-600 group-hover:text-blue-800 font-medium text-sm mt-2 inline-block">
-                                Lihat Detail
+                            <div class="mt-3 pt-2 border-t border-gray-100">
+                                <div
+                                    class="text-blue-600 group-hover:text-blue-800 font-medium text-sm inline-flex items-center">
+                                    Lihat Detail
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -74,7 +92,6 @@
             </div>
 
             <!-- Load More Button -->
-            <!-- Untuk menambahkan load 4 product lagi -->
             @if ($brand->products->count() > ($loadedCounts[$brand->id] ?? $perBrand))
                 <div class="text-center mt-6">
                     <button wire:click="loadMore({{ $brand->id }})" wire:loading.attr="disabled"

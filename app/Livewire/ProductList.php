@@ -34,14 +34,15 @@ class ProductList extends Component
     {
         $brands = Brand::with(['products' => function($query) {
                 $query->where('is_active', true)
+                    ->orderBy('is_bestseller', 'DESC') // Bestseller pertama
                     ->orderByRaw('
                         (SELECT MAX(price) 
-                         FROM JSON_TABLE(
-                             variations,
-                             "$[*]" COLUMNS(
-                                 price DECIMAL(10,2) PATH "$.price"
-                             )
-                         ) as prices
+                        FROM JSON_TABLE(
+                            variations,
+                            "$[*]" COLUMNS(
+                                price DECIMAL(10,2) PATH "$.price"
+                            )
+                        ) as prices
                         ) DESC
                     ');
             }])

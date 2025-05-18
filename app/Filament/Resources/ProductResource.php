@@ -79,7 +79,7 @@ class ProductResource extends Resource
                         ->columnSpanFull()
                         ->label('Available Variations')
                         ->reactive()
-                        ->hidden(fn (callable $get) => $get('is_preorder')), // Sembunyikan kalau preorder aktif
+                        ->hidden(fn (callable $get) => $get('is_preorder')),
                 ])
                 ->collapsible()
                 ->collapsed(),
@@ -98,15 +98,19 @@ class ProductResource extends Resource
                         ->reactive()
                         ->afterStateUpdated(function ($state, callable $set) {
                             if ($state) {
-                                $set('variations', []); // Jika preorder aktif, kosongkan variations
+                                $set('variations', []);
                             }
                         }),
 
                     Forms\Components\Toggle::make('is_active')
                         ->label('Active')
                         ->default(true),
+                        
+                    Forms\Components\Toggle::make('is_bestseller')
+                        ->label('Best Seller')
+                        ->default(false),
                 ])
-                ->columns(2),
+                ->columns(3), // Changed to 3 columns to accommodate the new toggle
         ]);
     }
 
@@ -126,21 +130,17 @@ class ProductResource extends Resource
                 ->formatStateUsing(fn($state) => $state ? "{$state} mAh" : '')
                 ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('variations')
+            Tables\Columns\TextColumn::make('variations')
                 ->label('Variations')
                 ->formatStateUsing(function ($state) {
-                    // Handle empty state
                     if (empty($state)) return '-';
                     
-                    // Decode JSON string to array
                     $variations = json_decode('['.$state.']', true);
                     
-                    // Jika decode gagal
                     if (json_last_error() !== JSON_ERROR_NONE) {
                         return 'Invalid data format';
                     }
                     
-                    // Process variations
                     return collect($variations)->map(function ($item) {
                         $ram = $item['ram'] ?? '?';
                         $storage = $item['storage'] ?? '?';
@@ -155,6 +155,7 @@ class ProductResource extends Resource
 
             Tables\Columns\IconColumn::make('is_preorder')->boolean()->label('Preorder'),
             Tables\Columns\IconColumn::make('is_active')->boolean()->label('Active'),
+            Tables\Columns\IconColumn::make('is_bestseller')->boolean()->label('Best Seller'),
         ])
         ->filters([
             Tables\Filters\SelectFilter::make('brand')
@@ -168,6 +169,10 @@ class ProductResource extends Resource
             Tables\Filters\Filter::make('active')
                 ->query(fn($query) => $query->where('is_active', true))
                 ->label('Active Only'),
+                
+            Tables\Filters\Filter::make('bestseller')
+                ->query(fn($query) => $query->where('is_bestseller', true))
+                ->label('Best Seller Only'),
 
             Tables\Filters\SelectFilter::make('ram')
                 ->label('Filter by RAM')
