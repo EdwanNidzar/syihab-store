@@ -32,7 +32,8 @@ class ProductList extends Component
 
     public function render()
     {
-        $brands = Brand::with(['products' => function($query) {
+        $brands = Brand::with([
+            'products' => function($query) {
                 $query->where('is_active', true)
                     ->orderBy('is_bestseller', 'DESC') // Bestseller pertama
                     ->orderByRaw('
@@ -45,7 +46,11 @@ class ProductList extends Component
                         ) as prices
                         ) DESC
                     ');
-            }])
+            },
+            'gskProductDisplay' => function ($query) {
+                $query->inRandomOrder(); // ambil secara acak
+            }
+            ])
             ->has('products')
             ->get();
 

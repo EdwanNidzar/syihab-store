@@ -37,4 +37,14 @@ class Brand extends Model
         });
     }
 
+    // public function gsktipe()
+    // {
+    //     return $this->hasMany(GskTipe::class);
+    // }
+
+    public function gskProductDisplay()
+    {
+        return $this->hasMany(GskProductDisplay::class);
+    }
+
 }
