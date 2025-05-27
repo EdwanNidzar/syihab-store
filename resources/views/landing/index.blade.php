@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="nmXm-gbjM5RazLLF1czd9szRwkpNUohAJDjP2W5t3jU" />
     {!! SEO::generate() !!}
     <script src="https://cdn.tailwindcss.com"></script>
 
