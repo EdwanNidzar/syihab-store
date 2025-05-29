@@ -15,6 +15,9 @@
 
     @stack('styles')
 
+    <!-- Google Analytics -->
+    @include('tag.google-analytics')
+
     @livewireStyles
 </head>
 
