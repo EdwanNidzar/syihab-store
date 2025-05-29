@@ -35,6 +35,10 @@
             flex-grow: 1;
         }
     </style>
+
+    <!-- Google Analytics -->
+    @include('tag.google-analytics')
+    
     @livewireStyles
 </head>
 

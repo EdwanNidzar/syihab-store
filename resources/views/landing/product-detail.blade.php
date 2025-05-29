@@ -8,6 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="{{ asset('img/logo/new-logo-syihab.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+    <!-- Google Analytics -->
+    @include('tag.google-analytics')
+    
     @livewireStyles
 </head>
 

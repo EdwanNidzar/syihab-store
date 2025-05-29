@@ -62,6 +62,10 @@
             color: #2563eb;
         }
     </style>
+
+    <!-- Google Analytics -->
+    @include('tag.google-analytics')
+    
     @livewireStyles
 </head>
 
