@@ -7,8 +7,7 @@
                     <a href="{{ route('brand-detail', $brand->slug) }}" class="block">
                         <!-- Image container -->
                         <div class="h-16 sm:h-20 overflow-hidden relative">
-                            <img src="{{ asset('img/brandlist/' . $brand->slug . '.png') }}" alt="{{ $brand->name }}"
-                                class="w-full h-full object-cover object-top">
+                            <img src="{{ asset('img/brandlist/' . $brand->slug . '.png') }}" alt="{{ $brand->name }}" style="width: 100px; height: 100px; ">
                         </div>
                         <!-- Brand name -->
                         <div class="mt-1 sm:mt-2 p-1 sm:p-2 font-medium text-xs sm:text-sm text-gray-700 truncate">
