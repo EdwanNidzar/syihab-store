@@ -22,7 +22,7 @@ class LandingController extends Controller
             'Syihab Store', 'SyihabStore', 'Syihab', 'Syihab Store Official', 'Syihab Store Official',
             'HP Termurah Kalimantan', 'HP Terlengkap Kalimantan', 'HP Termurah dan Terlengkap Di Kalimantan',
             'Toko HP Murah Banjarmasin', 'Toko HP Kalimantan Selatan', 'Jual HP Termurah Kalimantan',
-            'Gadget Terbaru Kalimantan',
+            'Gadget Terbaru Kalimantan', 'HP Murah'
         ]);
 
         return view('landing.index');
