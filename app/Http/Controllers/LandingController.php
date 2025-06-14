@@ -18,7 +18,12 @@ class LandingController extends Controller
         SEOTools::opengraph()->setUrl(url('/'));
         SEOTools::setCanonical(url('/'));
         SEOTools::opengraph()->addProperty('type', 'website');
-        SEOMeta::addKeyword(['Syihab Store', 'SyihabStore', 'Syihab', 'Syihab Store Official', 'Syihab Store Official Store']);
+        SEOMeta::addKeyword([
+            'Syihab Store', 'SyihabStore', 'Syihab', 'Syihab Store Official', 'Syihab Store Official',
+            'HP Termurah Kalimantan', 'HP Terlengkap Kalimantan', 'HP Termurah dan Terlengkap Di Kalimantan',
+            'Toko HP Murah Banjarmasin', 'Toko HP Kalimantan Selatan', 'Jual HP Termurah Kalimantan',
+            'Gadget Terbaru Kalimantan',
+        ]);
 
         return view('landing.index');
     }
